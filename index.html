@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Ultimate Stock Market & Trading Masterclass · ExpressSpark</title>
+<meta name="color-scheme" content="light only"/>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" defer></script>
+
+<style>
+  :root{
+    --navy:#0B1F3B; --ink:#1A1A1A; --muted:#5B6473; --line:#E7EAF0;
+    --page:#F6F7FA; --card:#FFFFFF; --gold:#C8A64B;
+    --cta:#0A5BD3; --cta-dark:#0A4AB0; --soft:#F9FAFB;
+
+    --shadow-1:0 2px 12px rgba(0,0,0,.06);
+    --shadow-2:0 8px 22px rgba(0,0,0,.08);
+    --shadow-3:0 18px 44px rgba(10,35,75,.14);
+
+    --t:.45s cubic-bezier(.2,.7,.2,1);
+    --t2:.7s cubic-bezier(.2,.7,.2,1);
+
+    /* Space for sticky footer; updated via JS */
+    --stickyH: 76px;
+  }
+  *{box-sizing:border-box} html,body{margin:0;padding:0}
+  body{
+    font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+    background:var(--page); color:var(--ink); line-height:1.6;
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    padding-bottom: var(--stickyH);
+  }
+
+  .container{max-width:1200px;margin:0 auto;padding:0 20px}
+  a{text-decoration:none}
+
+  /* Header */
+  .site-header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:80;backdrop-filter:saturate(160%) blur(6px)}
+  .header-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
+  .brand{color:var(--navy);font-weight:800;letter-spacing:.3px}
+  .byline{color:var(--muted);font-weight:600;font-size:.92rem}
+  .brand-wrap{display:flex;flex-direction:column}
+  .top-cta{display:flex;gap:10px;flex-wrap:wrap}
+
+  .btn{appearance:none;border:1px solid transparent;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer;
+       display:inline-flex;align-items:center;justify-content:center;transition:transform .15s ease,box-shadow .15s ease,background .2s ease,border-color .2s ease;
+       box-shadow:var(--shadow-1);background:var(--cta);color:#fff}
+  .btn:hover{background:var(--cta-dark);transform:translateY(-1px);box-shadow:var(--shadow-2)}
+  .btn-outline{background:#fff;color:var(--navy);border:1px solid var(--line)}
+  .btn-outline:hover{border-color:var(--navy)}
+  .btn-light{background:#fff;color:var(--navy);border:1px solid var(--line)}
+  .btn-light:hover{border-color:var(--navy)}
+  .btn-sm{padding:10px 12px;border-radius:10px;font-weight:700}
+
+  /* Hero */
+  .hero{background:radial-gradient(1200px 500px at 20% -10%,#ffffff 0%,#fafbfd 50%,#f3f5fa 100%);border-bottom:1px solid var(--line)}
+  .hero-grid{display:grid;grid-template-columns:1.45fr .9fr;gap:34px;padding:40px 0 30px}
+  @media (max-width: 980px){ .hero-grid{grid-template-columns:1fr} }
+  .h-eyebrow{display:inline-block;color:var(--navy);font-weight:700;background:#fff;border:1px solid var(--line);padding:6px 10px;border-radius:9999px;box-shadow:var(--shadow-1)}
+  .h-title{color:var(--navy);font-size:2.2rem;line-height:1.2;font-weight:800;margin:14px 0 8px}
+  .h-sub{color:var(--muted);font-weight:500;margin:0 0 18px}
+  .meta{display:flex;gap:12px;flex-wrap:wrap;color:var(--navy);font-weight:700;margin:10px 0 0}
+  .meta .dot{width:6px;height:6px;background:var(--gold);display:inline-block;border-radius:2px;margin:0 8px 2px}
+
+  .badges{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0 20px}
+  .badge{background:#fff;border:1px solid var(--line);color:var(--navy);font-weight:700;padding:10px 14px;border-radius:9999px;box-shadow:var(--shadow-1)}
+  .badge.gold{border-color:#E9E2C9;background:linear-gradient(180deg,#fff,#fff 60%)}
+
+  .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0 0}
+
+  /* Pricing */
+  .price-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow-3);transition:transform var(--t), box-shadow var(--t)}
+  .price-card:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(10,35,75,.18)}
+  .price-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+  .ribbon{font-weight:800;color:var(--gold);letter-spacing:.4px}
+  .price{display:flex;align-items:end;gap:10px}
+  .mrp{color:#9aa3b2;text-decoration:line-through;font-weight:600}
+  .now{color:var(--navy);font-size:2rem;font-weight:800}
+  .incl{font-size:.92rem;color:var(--muted)}
+  .pay-actions{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+  .alt-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+
+  /* Sections */
+  section{padding:38px 0}
+  .section-title{color:var(--navy);font-weight:800;font-size:1.6rem;margin:0 0 14px;position:relative;display:inline-block}
+  .section-title:after{content:"";position:absolute;left:0;bottom:-6px;height:3px;width:54px;background:var(--gold);border-radius:4px}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media (max-width: 980px){ .grid-3{grid-template-columns:1fr} }
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:var(--shadow-1);transition:transform var(--t), box-shadow var(--t)}
+  .card:hover{transform:translateY(-3px);box-shadow:var(--shadow-2)}
+  .card h4{margin:0 0 8px;color:var(--navy);font-weight:700}
+  .muted{color:var(--muted)}
+
+  /* Curriculum */
+  .curriculum{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .module{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:16px;box-shadow:var(--shadow-1);page-break-inside:avoid;opacity:0;transform:translateY(10px);animation:fadeUp var(--t2) forwards}
+  .module h3{color:var(--navy);font-size:1.05rem;text-transform:uppercase;font-weight:800;margin:0 0 10px;border-left:6px solid var(--gold);padding-left:10px}
+  .module ul{list-style:none;margin:0;padding:0 0 0 14px;columns:2;column-gap:28px}
+  @media (max-width:980px){ .module ul{columns:1} }
+  .module li{margin:6px 0;break-inside:avoid}
+  .module li::before{content:"";display:inline-block;width:7px;height:7px;margin-right:10px;background:var(--gold);border-radius:2px;transform:translateY(-1px)}
+  .download-wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:8px}
+  .note{color:var(--muted);font-size:.95rem}
+
+  /* Sticky CTA */
+  .sticky{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);z-index:70;box-shadow:0 -10px 20px rgba(0,0,0,.04)}
+  .sticky-inner{display:flex;align-items:center;justify-content:center;gap:10px;padding:10px 12px;flex-wrap:wrap}
+
+  /* Modal */
+  .modal{position:fixed;inset:0;background:rgba(11,31,59,.55);display:none;align-items:center;justify-content:center;z-index:100}
+  .modal.show{display:flex;animation:fadeIn .22s ease}
+  .modal-card{background:#fff;border-radius:16px;max-width:560px;width:92%;box-shadow:var(--shadow-3);border:1px solid var(--line);overflow:hidden;max-height:90vh;display:flex;flex-direction:column}
+  .modal-head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--line)}
+  .modal-title{color:var(--navy);font-weight:800}
+  .modal-body{padding:18px;overflow:auto}
+  .modal-foot{padding:14px 18px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:10px}
+
+  /* Popups */
+  .promo{position:fixed;right:24px;z-index:75;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-3);padding:14px 16px;display:none;max-width:300px}
+  .promo.show{display:block;animation:slideUp .3s var(--t)}
+  .promo h4{margin:0 0 6px;color:var(--navy);font-weight:800}
+  .promo p{margin:0;color:var(--muted);font-size:.95rem}
+  .promo{bottom: calc(var(--stickyH) + 14px);} /* keep above sticky */
+
+  /* Footer */
+  .footer{background:#fff;border-top:1px solid var(--line)}
+  .footer-inner{padding:18px 0;text-align:center;color:var(--muted)}
+  .footer-inner strong{color:var(--navy)}
+
+  /* Animations */
+  @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  @keyframes slideUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  .reveal{opacity:0;transform:translateY(12px)}
+  .reveal.show{opacity:1;transform:translateY(0);transition:transform var(--t),opacity var(--t)}
+
+  /* Print/PDF */
+  @media print{
+    .site-header,.sticky,.promo,.download-only{display:none !important}
+    body{background:#fff;padding-bottom:0}
+    .module{box-shadow:none;border-color:#DDD}
+    .module ul{columns:1}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand-wrap">
+      <div class="brand">Ultimate Stock Market & Trading Masterclass</div>
+      <div class="byline">by <strong>ExpressSpark</strong></div>
+    </div>
+    <div class="top-cta">
+      <a class="btn btn-outline" href="https://wa.me/919346813383?text=Hi%2C%20I%20want%20to%20enroll%20for%20the%20Stock%20Market%20%26%20Trading%20Masterclass." target="_blank" rel="noopener">WhatsApp</a>
+      <a class="btn btn-outline" href="tel:+919346813383">Call: 9346813383</a>
+      <button class="btn" id="downloadTop">Download Brochure (PDF)</button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="reveal">
+      <span class="h-eyebrow">Comprehensive Capital Markets Program</span>
+      <h1 class="h-title">Master Markets with a Structured, End-to-End Curriculum</h1>
+      <p class="h-sub">Foundations, technicals, options, intraday, fundamentals, portfolio, algo, risk and psychology — with guided live sessions and expert mentorship.</p>
+
+      <!-- Batch info -->
+      <div class="meta">
+        <span><strong>30 slots per batch</strong></span>
+        <span class="dot"></span>
+        <span><strong>Next batch starts: 10 Sept</strong></span>
+      </div>
+
+      <!-- Professional banners inside hero -->
+      <div class="badges">
+        <div class="badge">Live Trading Sessions</div>
+        <div class="badge">Mentored by Experts</div>
+        <div class="badge gold">Limited Seats</div>
+      </div>
+
+      <div class="hero-actions">
+        <button class="btn" id="enrollHero">Enroll Now</button>
+        <a class="btn btn-light" href="https://wa.me/919346813383?text=Hi%2C%20I%20want%20to%20enroll%20for%20the%20Stock%20Market%20%26%20Trading%20Masterclass." target="_blank" rel="noopener">Register via WhatsApp</a>
+        <a class="btn btn-light" href="tel:+919346813383">Call to Register</a>
+      </div>
+    </div>
+
+    <!-- Pricing -->
+    <aside class="price-card reveal" aria-label="Pricing">
+      <div class="price-head"><div class="ribbon">Limited-Time Offer</div></div>
+      <div class="price">
+        <div class="mrp">₹40,000</div>
+        <div class="now">₹9,999</div>
+      </div>
+      <div class="incl">Includes live classes, recordings, resources, and support.</div>
+      <div class="pay-actions">
+        <button class="btn" id="enrollPrice">Enroll Now</button>
+        <div class="alt-actions">
+          <a class="btn btn-outline btn-sm" href="https://wa.me/919346813383?text=Hi%2C%20I%20want%20to%20enroll%20for%20the%20Stock%20Market%20%26%20Trading%20Masterclass." target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn btn-outline btn-sm" href="tel:+919346813383">Call</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- WHAT YOU GET -->
+<section>
+  <div class="container">
+    <h2 class="section-title">What You’ll Get</h2>
+    <div class="grid-3">
+      <div class="card reveal"><h4>Live Sessions + Recordings</h4><p class="muted">Interactive live classes with access to recordings for revision and catch-up.</p></div>
+      <div class="card reveal"><h4>Dedicated Doubt Support</h4><p class="muted">Post-class Q&A windows and structured doubt resolution channels.</p></div>
+      <div class="card reveal"><h4>Resources & Templates</h4><p class="muted">Checklists, trade journal templates, and reference decks.</p></div>
+      <div class="card reveal"><h4>Case Studies</h4><p class="muted">Real market scenarios to help you translate theory into action.</p></div>
+      <div class="card reveal"><h4>Assessments</h4><p class="muted">Module-wise knowledge checks to track and reinforce learning.</p></div>
+      <div class="card reveal"><h4>Completion Certificate</h4><p class="muted">A verified certificate on successful completion of the program.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section>
+  <div class="container">
+    <h2 class="section-title">Outcomes & Benefits</h2>
+    <div class="grid-3">
+      <div class="card reveal"><h4>Strong Foundations</h4><p class="muted">Understand markets, participants, and the lifecycle of a trade end-to-end.</p></div>
+      <div class="card reveal"><h4>Actionable Frameworks</h4><p class="muted">Deploy technical, options, and intraday setups with structure and risk control.</p></div>
+      <div class="card reveal"><h4>Risk-First Thinking</h4><p class="muted">Position sizing, drawdown management, and psychology to protect capital.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
+<section class="curriculum" id="curriculum">
+  <div class="container">
+    <h2 class="section-title">Curriculum</h2>
+
+    <!-- Module 1 -->
+    <div class="module reveal">
+      <h3>Module 1: Stock Market Basics & Foundations</h3>
+      <ul>
+        <li>What is the Stock Market?</li><li>Types of Financial Markets</li><li>Primary Market vs Secondary Market</li>
+        <li>Stock Exchanges: NSE, BSE, NYSE, NASDAQ</li><li>Index Basics: Sensex, Nifty, Dow Jones, Nasdaq</li>
+        <li>IPO Process</li><li>Book Building Process</li><li>Market Participants: FIIs, DIIs, Retail, HNIs</li>
+        <li>Demat Account Setup</li><li>Trading Account Setup</li><li>Types of Orders: Market Order</li>
+        <li>Types of Orders: Limit Order</li><li>Types of Orders: Stop Loss Order</li><li>Types of Orders: GTT (Good Till Triggered)</li>
+        <li>Settlement Cycles: T+1</li><li>Settlement Cycles: T+2</li><li>Corporate Actions: Bonus Shares</li>
+        <li>Corporate Actions: Stock Split</li><li>Corporate Actions: Dividend</li><li>Corporate Actions: Buyback</li>
+        <li>Bull Market Phases</li><li>Bear Market Phases</li><li>Liquidity in Markets</li><li>Volatility in Markets</li>
+        <li>Market Depth & Order Book</li><li>Leverage Basics</li><li>Margin Trading Basics</li><li>Short Selling Concept</li>
+        <li>How to Use a Stock Screener</li><li>Role of SEBI</li><li>Impact of GDP on Markets</li><li>Impact of Inflation on Markets</li>
+        <li>Impact of Interest Rates on Markets</li><li>Trading Mindset vs Investing Mindset</li><li>How to Read Market News</li><li>Lifecycle of a Trade</li>
+      </ul>
+    </div>
+
+    <!-- Module 2 -->
+    <div class="module reveal">
+      <h3>Module 2: Technical Analysis – Candlesticks, Indicators & Basics</h3>
+      <ul>
+        <li>Introduction to Candlesticks</li><li>Doji Pattern</li><li>Hammer Pattern</li><li>Inverted Hammer</li>
+        <li>Hanging Man</li><li>Shooting Star</li><li>Bullish Engulfing</li><li>Bearish Engulfing</li>
+        <li>Morning Star</li><li>Evening Star</li><li>Bullish Harami</li><li>Bearish Harami</li>
+        <li>Piercing Pattern</li><li>Dark Cloud Cover</li><li>Three White Soldiers</li><li>Three Black Crows</li>
+        <li>Chart Types: Line Chart</li><li>Chart Types: Bar Chart</li><li>Chart Types: Candlestick Chart</li><li>Chart Types: Heikin Ashi</li>
+        <li>Support & Resistance</li><li>Trendlines</li><li>Breakouts</li><li>Fakeouts</li>
+        <li>Indicators: Simple Moving Average (SMA)</li><li>Indicators: Exponential Moving Average (EMA)</li>
+        <li>Indicators: Weighted Moving Average (WMA)</li><li>Indicators: RSI</li><li>Indicators: MACD</li>
+        <li>Indicators: Stochastic Oscillator</li><li>Indicators: Bollinger Bands</li><li>Indicators: Pivot Points</li>
+        <li>Fibonacci Retracements</li><li>Fibonacci Extensions</li>
+        <li>Timeframe Selection for Scalping</li><li>Timeframe Selection for Intraday</li>
+        <li>Timeframe Selection for Swing</li><li>Timeframe Selection for Positional Trading</li>
+      </ul>
+    </div>
+
+    <!-- Module 3 -->
+    <div class="module reveal">
+      <h3>Module 3: Advanced Technical Strategies & Price Action</h3>
+      <ul>
+        <li>Dow Theory & Market Phases</li><li>Elliott Wave Theory Basics</li><li>Impulse Waves</li><li>Corrective Waves</li>
+        <li>Wyckoff Accumulation</li><li>Wyckoff Distribution</li><li>Wyckoff Schematics</li>
+        <li>Head & Shoulders Pattern</li><li>Inverse Head & Shoulders</li><li>Double Top</li><li>Double Bottom</li>
+        <li>Triple Top</li><li>Triple Bottom</li><li>Cup & Handle Pattern</li><li>Rounding Bottom Pattern</li>
+        <li>Rectangle Pattern</li><li>Flag Pattern</li><li>Pennant Pattern</li><li>Ascending Triangle</li>
+        <li>Descending Triangle</li><li>Symmetrical Triangle</li><li>Falling Wedge</li><li>Rising Wedge</li><li>Broadening Formation</li>
+        <li>Breakout Retest Strategy</li><li>Pullback Entry Strategy</li><li>Rejection Candlestick Strategy</li>
+        <li>Supply Zone Identification</li><li>Demand Zone Identification</li><li>Institutional Trading Concepts</li>
+        <li>Confluence Trading (Multiple Signals)</li><li>Momentum Trading</li><li>Trend Following Strategy</li>
+        <li>Divergence Trading (RSI)</li><li>Divergence Trading (MACD)</li><li>Scalping Techniques</li><li>Swing Trading Setups</li>
+        <li>Multi-Timeframe Analysis</li><li>Trade Journaling</li><li>Backtesting Strategies</li>
+      </ul>
+    </div>
+
+    <!-- Module 4 -->
+    <div class="module reveal">
+      <h3>Module 4: Fundamental Analysis & Valuation</h3>
+      <ul>
+        <li>What is Fundamental Analysis?</li><li>Top-Down vs Bottom-Up Approach</li><li>Understanding Financial Statements</li>
+        <li>Profit & Loss Statement</li><li>Balance Sheet</li><li>Cash Flow Statement</li><li>Ratio Analysis Basics</li>
+        <li>Price to Earnings (P/E) Ratio</li><li>Price to Book (P/B) Ratio</li><li>Return on Equity (ROE)</li>
+        <li>Return on Capital Employed (ROCE)</li><li>Earnings Per Share (EPS)</li><li>Debt to Equity Ratio</li><li>Dividend Yield</li>
+        <li>Valuation Models: Relative Valuation</li><li>Valuation Models: Asset-Based Valuation</li>
+        <li>Economic Moats & Competitive Advantage</li><li>Sectoral & Industry Analysis</li>
+        <li>Impact of Interest Rates</li><li>Impact of Inflation</li><li>Impact of Fiscal & Monetary Policy</li>
+        <li>Reading Annual Reports</li><li>Management Discussion & Analysis</li><li>Corporate Governance</li>
+        <li>Stock Screening Using Fundamentals</li><li>Long-Term Investing Approaches</li><li>Value Investing Strategies</li>
+        <li>Growth Investing Strategies</li><li>Dividend Investing Strategies</li>
+      </ul>
+    </div>
+
+    <!-- Module 5 -->
+    <div class="module reveal">
+      <h3>Module 5: Mutual Funds, ETFs & Portfolio Building</h3>
+      <ul>
+        <li>What is a Mutual Fund?</li><li>Types of Mutual Funds: Equity</li><li>Types of Mutual Funds: Debt</li>
+        <li>Types of Mutual Funds: Hybrid</li><li>Types of Mutual Funds: Index Funds</li><li>Systematic Investment Plans (SIP)</li>
+        <li>Systematic Withdrawal Plans (SWP)</li><li>Systematic Transfer Plans (STP)</li><li>Expense Ratio & TER</li>
+        <li>NAV (Net Asset Value)</li><li>ETF Basics</li><li>ETFs vs Mutual Funds</li><li>Gold ETFs</li><li>Sectoral ETFs</li><li>Index ETFs</li>
+        <li>Portfolio Diversification</li><li>Asset Allocation Strategies</li><li>Risk Profiling of Investor</li>
+        <li>Passive vs Active Investing</li><li>ELSS & Tax-Saving Mutual Funds</li><li>How to Select the Right Fund</li>
+        <li>How to Read a Fund Factsheet</li><li>Long-Term Wealth Building with SIP</li>
+      </ul>
+    </div>
+
+    <!-- Module 6 -->
+    <div class="module reveal">
+      <h3>Module 6: Derivatives & Options Trading Strategies</h3>
+      <ul>
+        <li>Introduction to Derivatives</li><li>Futures Contracts Basics</li><li>Hedging with Futures</li>
+        <li>Options Basics (CE & PE)</li><li>Intrinsic Value vs Time Value</li>
+        <li>Option Greeks: Delta</li><li>Option Greeks: Gamma</li><li>Option Greeks: Theta</li>
+        <li>Covered Call</li><li>Protective Put</li><li>Collar Strategy</li><li>Bull Call Spread</li><li>Bear Call Spread</li>
+        <li>Bull Put Spread</li><li>Bear Put Spread</li><li>Long Straddle</li><li>Short Straddle</li>
+        <li>Long Strangle</li><li>Short Strangle</li><li>Iron Condor</li><li>Iron Butterfly</li>
+        <li>Ratio Spread</li><li>Calendar Spread</li><li>Synthetic Long</li><li>Synthetic Short</li>
+        <li>Naked Options Writing</li><li>Delta Neutral Trading</li><li>Theta Decay Strategy</li><li>Volatility Crush Strategy</li>
+        <li>Event-Based Straddle Play</li><li>Weekly Expiry Selling Strategies</li><li>High IV Strategies</li><li>Low IV Strategies</li>
+        <li>Portfolio Hedging with Options</li>
+      </ul>
+    </div>
+
+    <!-- Module 7 -->
+    <div class="module reveal">
+      <h3>Module 7: Intraday, Commodity & Forex Trading</h3>
+      <ul>
+        <li>Introduction to Intraday Trading</li><li>Gap Up Trading Strategy</li><li>Gap Down Trading Strategy</li>
+        <li>RSI Divergence Intraday Setup</li><li>Intraday Momentum Breakout</li><li>Moving Average Crossover Scalping</li>
+        <li>Pivot Point Intraday Setup</li><li>CPR (Central Pivot Range) Strategy</li><li>Intraday Risk Management Rules</li>
+        <li>Commodity Basics: Gold, Silver, Crude</li><li>Crude Oil Inventory Strategy</li><li>Gold-Silver Ratio Trading</li>
+        <li>Forex Breakout Strategy</li><li>Correlation Trading (Gold-USD, Oil-USD)</li><li>Range-Bound Bollinger Strategy</li>
+        <li>Forex Trend Continuation Setup</li><li>Risk in Commodity & Forex Markets</li>
+      </ul>
+    </div>
+
+    <!-- Module 8 -->
+    <div class="module reveal">
+      <h3>Module 8: Algo Trading, Risk Management & Psychology</h3>
+      <ul>
+        <li>Introduction to Algo Trading</li><li>No-Code Algo Platforms: Algo-Test</li><li>APIs & Broker Integration</li>
+        <li>Backtesting Strategies in Algo Platforms</li><li>Paper Trading before Live Execution</li><li>Position Sizing Strategies</li>
+        <li>Risk-Reward Ratios</li><li>Money Management Principles</li><li>Drawdown Management</li><li>Stop Loss Rules</li>
+        <li>Trailing Stop Loss</li><li>Pyramiding & Scaling Out</li><li>Psychology of Trading</li><li>Discipline & Patience</li>
+        <li>Fear & Greed Cycle</li><li>FOMO in Trading</li><li>Building a Trading Plan</li><li>Maintaining a Trade Journal</li>
+        <li>Consistency over Perfection</li><li>Handling Losses Professionally</li><li>Importance of Mindset in Wealth Building</li>
+      </ul>
+    </div>
+
+    <div class="download-wrap">
+      <p class="note">Prefer a document? Download the complete curriculum.</p>
+      <button class="btn" id="downloadCurriculum">Download Curriculum (PDF)</button>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container footer-inner">
+    © <strong>ExpressSpark</strong> · Ultimate Stock Market & Trading Masterclass · 30 slots per batch · Next batch: <strong>10 Sept</strong>
+  </div>
+</footer>
+
+<!-- Sticky CTA -->
+<div class="sticky" id="stickyBar">
+  <div class="container sticky-inner">
+    <button class="btn" id="enrollSticky">Enroll Now</button>
+    <a class="btn btn-light" href="https://wa.me/919346813383?text=Hi%2C%20I%20want%20to%20enroll%20for%20the%20Stock%20Market%20%26%20Trading%20Masterclass." target="_blank" rel="noopener">WhatsApp</a>
+    <a class="btn btn-light" href="tel:+919346813383">Call 9346813383</a>
+  </div>
+</div>
+
+<!-- Enrollment Modal -->
+<div class="modal" id="enrollModal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head">
+      <div class="modal-title">Enroll & Secure Your Seat</div>
+      <button class="btn btn-outline btn-sm" id="closeModal">Close</button>
+    </div>
+    <div class="modal-body">
+      <p class="muted" style="margin-top:0">Complete your enrollment using the secure payment form below. You’ll receive an instant confirmation.</p>
+
+      <!-- ✅ Razorpay: Script INSIDE a <form> (as required) -->
+      <form>
+        <script
+          src="https://checkout.razorpay.com/v1/payment-button.js"
+          data-payment_button_id="pl_RDXOMUBrItWgkc"
+          async>
+        </script>
+      </form>
+
+      <div class="alt-actions" style="margin-top:12px">
+        <a class="btn btn-light" href="https://wa.me/919346813383?text=Hi%2C%20I%20want%20to%20enroll%20for%20the%20Stock%20Market%20%26%20Trading%20Masterclass." target="_blank" rel="noopener">Need Help? WhatsApp</a>
+        <a class="btn btn-light" href="tel:+919346813383">Call Support</a>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-outline btn-sm" id="closeModal2">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Multi popups (timed & recurring) -->
+<div class="promo" id="promo1">
+  <h4>Hurry up — 30 slots per batch</h4>
+  <p>Next batch starts on <strong>10 Sept</strong>. Secure your seat now.</p>
+  <div style="margin-top:10px;display:flex;gap:8px">
+    <button class="btn btn-sm" data-enroll>Enroll Now</button>
+    <button class="btn btn-outline btn-sm" data-dismiss>Later</button>
+  </div>
+</div>
+
+<div class="promo" id="promo2">
+  <h4>Limited-Time Offer — ₹9,999</h4>
+  <p>Original price ₹40,000. Don’t miss the current cohort.</p>
+  <div style="margin-top:10px;display:flex;gap:8px">
+    <button class="btn btn-sm" data-enroll>Enroll Now</button>
+    <button class="btn btn-outline btn-sm" data-dismiss>Later</button>
+  </div>
+</div>
+
+<div class="promo" id="promo3">
+  <h4>Live Mentorship</h4>
+  <p>Guided live sessions with experts. Reserve your seat today.</p>
+  <div style="margin-top:10px;display:flex;gap:8px">
+    <button class="btn btn-sm" data-enroll>Enroll Now</button>
+    <button class="btn btn-outline btn-sm" data-dismiss>Later</button>
+  </div>
+</div>
+
+<script>
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }
+    });
+  },{threshold:.08});
+  document.querySelectorAll('.reveal, .module').forEach(el=> io.observe(el));
+
+  // PDF (curriculum only)
+  function downloadCurriculumPDF(){
+    const node = document.getElementById('curriculum');
+    const opt = { margin:0.5, filename:'TradingMasterclass-Curriculum.pdf',
+      pagebreak:{mode:['css','legacy']}, image:{type:'jpeg',quality:0.98},
+      html2canvas:{scale:2,scrollY:0}, jsPDF:{unit:'in',format:'a4',orientation:'portrait'} };
+    html2pdf().from(node).set(opt).save();
+  }
+  document.getElementById('downloadCurriculum')?.addEventListener('click', downloadCurriculumPDF);
+  document.getElementById('downloadTop')?.addEventListener('click', downloadCurriculumPDF);
+
+  // Modal open/close (no lazy injection needed now)
+  const modal = document.getElementById('enrollModal');
+  function openModal(){ modal.classList.add('show'); modal.setAttribute('aria-hidden','false'); }
+  function closeModal(){ modal.classList.remove('show'); modal.setAttribute('aria-hidden','true'); }
+
+  ['enrollHero','enrollPrice','enrollSticky'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.addEventListener('click', openModal);
+  });
+  document.getElementById('closeModal')?.addEventListener('click', closeModal);
+  document.getElementById('closeModal2')?.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e)=>{ if(e.target===modal) closeModal(); });
+
+  // Multiple popups (timed & recurring, capped)
+  const promos = [document.getElementById('promo1'), document.getElementById('promo2'), document.getElementById('promo3')];
+  let promoIndex = 0, promoShows = 0;
+  const maxShows = 3, intervalMs = 45000;
+
+  function showNextPromo(){
+    if(promoShows >= maxShows) return;
+    promos.forEach(p=> p.classList.remove('show'));
+    const p = promos[promoIndex % promos.length];
+    p.classList.add('show');
+    promoIndex++; promoShows++;
+  }
+  setTimeout(showNextPromo, 10000);
+  const cycle = setInterval(()=>{
+    if(promoShows >= maxShows){ clearInterval(cycle); return; }
+    showNextPromo();
+  }, intervalMs);
+
+  // Exit-intent -> show a promo
+  let exitShown = false;
+  document.addEventListener('mouseout', (e)=>{
+    if(exitShown) return;
+    if(e.clientY <= 0){ exitShown = true; showNextPromo(); }
+  });
+
+  // Promo buttons
+  promos.forEach(p=>{
+    p.querySelectorAll('[data-enroll]').forEach(btn=> btn.addEventListener('click', ()=>{
+      p.classList.remove('show'); openModal();
+    }));
+    p.querySelectorAll('[data-dismiss]').forEach(btn=> btn.addEventListener('click', ()=>{
+      p.classList.remove('show');
+    }));
+  });
+
+  // Sticky height → bottom padding so nothing is hidden
+  const sticky = document.getElementById('stickyBar');
+  function applyStickyPadding(){
+    const h = sticky ? Math.ceil(sticky.getBoundingClientRect().height) : 0;
+    document.documentElement.style.setProperty('--stickyH', h + 'px');
+  }
+  window.addEventListener('load', applyStickyPadding);
+  window.addEventListener('resize', applyStickyPadding);
+  setTimeout(applyStickyPadding, 600);
+</script>
+
+</body>
+</html>
